@@ -17,7 +17,6 @@ public class Main {
 
     private void solution(ArrayList array) {
         Stack<Integer> stack = new Stack<>();
-        Scanner in = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
 
         int beforeNum = 0;
