@@ -19,7 +19,7 @@ public class Main {
             String answer = solution(num, str);
             sb.append(answer).append("\n");
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
 
     public static String solution(int n, String str){
