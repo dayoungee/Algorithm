@@ -1,31 +1,34 @@
-import java.io.*;
-import java.text.Collator;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
-    public static void main(String[] args) throws IOException
-    {
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        Main T = new Main();
-        for(int i = 0; i < n; i++) {
-            String str = in.next();
-            System.out.println(T.solution(str.toCharArray()));
-        }
-    }
+        int n = Integer.parseInt(br.readLine());
 
-    public String solution(char[] arr) {
-        Stack<Character> stack = new Stack<Character>();
-        for(char x : arr){
-            if(x=='(') stack.push(x);
-            else{
-                if(stack.isEmpty()) return "NO";
-                stack.pop();
+        while(n --> 0){
+            Stack<Character> stack = new Stack<>();
+            boolean flag = true;
+            String str = br.readLine();
+            for(char c : str.toCharArray()){
+                if(c == '(') stack.push(c);
+                else{
+                    if(stack.isEmpty()){
+                        flag = false;
+                        break;
+                    }
+                    stack.pop();
+                }
             }
+            if(!stack.isEmpty() || !flag) sb.append("NO").append("\n");
+            else sb.append("YES").append("\n");
         }
-        if(!stack.isEmpty()) return "NO";
-        return "YES";
+
+        System.out.print(sb);
     }
 
 }
