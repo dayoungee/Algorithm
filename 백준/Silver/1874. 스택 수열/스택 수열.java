@@ -1,47 +1,42 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Stack;
 
-import java.util.*;
 public class Main {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int num = in.nextInt();
-
-        ArrayList<Integer> array = new ArrayList<Integer>();
-        for(int i = 1; i <=num; i++)
-        {
-            int temp = in.nextInt();
-            array.add(temp);
-        }
-        Main T = new Main();
-        T.solution(array);
-    }
-
-    private void solution(ArrayList array) {
-        Stack<Integer> stack = new Stack<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
+        int n = Integer.parseInt(br.readLine());
 
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+
+        for(int i = 0; i < n; i++)  arr.add(Integer.parseInt(br.readLine()));
+
+        Stack<Integer> stack = new Stack<>();
         int beforeNum = 0;
-        for(int i = 0; i < array.size(); i ++)
-        {
-            int n = (int)array.get(i);
-            if(n > array.size())
-            {
-                System.out.println("NO");
+        for(int i = 0; i < arr.size(); i ++) {
+            int num = (int)arr.get(i);
+            if(num > arr.size()){
+                System.out.print("NO");
                 return;
             }
-            if(beforeNum < n) {
-                for (int j = beforeNum + 1; j <= n; j++) {
+
+            if(beforeNum < num){
+                for (int j = beforeNum + 1; j <= num; j++) {
                     sb.append('+').append('\n');
                     stack.push(j);
                 }
-                beforeNum = n;
+                beforeNum = num;
             }
-            if (stack.pop() == n)  sb.append('-').append('\n');
-            else {
-                System.out.println("NO");
+            if (stack.pop() == num)  sb.append('-').append('\n');
+            else{
+                System.out.print("NO");
                 return;
             }
         }
+        System.out.print(sb);
 
-        System.out.println(sb);
     }
 }
