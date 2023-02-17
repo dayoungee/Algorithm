@@ -16,14 +16,13 @@ public class Main {
         int b =Integer.parseInt(st.nextToken());
         int c = Integer.parseInt(st.nextToken());
 
-        int answer = 0;
-        int benefit = 0;
-        if(b>=c || c == 0){
+        if(b>=c){
             System.out.print("-1");
-            return;
         }
-        else if(a == 0) System.out.print("1");
-        System.out.println((a/(c-b))+1);
+        else{
+            System.out.println((a/(c-b))+1);
+        }
+
     }
 
 }
