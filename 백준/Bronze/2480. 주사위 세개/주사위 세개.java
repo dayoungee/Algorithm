@@ -13,28 +13,19 @@ public class Main {
         int B = Integer.parseInt(st.nextToken());
         int C = Integer.parseInt(st.nextToken());
 
+        int max = 0;
         if (A!=B && B!=C && A!=C){
-            int max;
-            if(A>B){
-                if(A>C){
-                    max = A;
-                } else max = C;
-
-            } else if (B>C) {
-                max = B;
-            } else max = C;
-
+            max = Math.max(max,A);
+            max = Math.max(max,B);
+            max = Math.max(max,C);
             sb.append(max * 100);
 
         } else if(A==B && A==C) {
-            sb.append(10000+A * 1000); // 틀린 곳  sb.append(10000+A + 1000);
+            sb.append(10000 + A * 1000);
 
         } else if(A==B || A==C){
-            sb.append(1000+ A * 100); //  sb.append(1000+ A + 100);
-            /*if(B==C){
-                sb.append(1000+B*100);
-            }*/
-        }else if ( B == C){
+            sb.append(1000 + A * 100);
+        }else{
             sb.append(1000+B*100);
         }
         System.out.println(sb);
