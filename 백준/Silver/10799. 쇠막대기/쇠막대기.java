@@ -1,36 +1,34 @@
-import java.io.*;
-import java.text.Collator;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
-public class Main {
+class Main {
 
-    public static void main(String[] args) throws IOException
-    {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        //Scanner in = new Scanner(System.in);
-       // String str = in.nextLine();
-        String str = br.readLine();
-        Main T = new Main();
-        T.solution(str.toCharArray());
+        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
 
-    }
-
-    public void solution(char[] arr) {
+        char[] stick = br.readLine().toCharArray();
+        Stack stack = new Stack<>();
         int answer = 0;
-        Stack<Character> stack = new Stack<>();
-        char lt = '(';
-        for(char c : arr){
+        for(int i = 0; i < stick.length; i++){
+            char c = stick[i];
             if(c == '(') stack.push(c);
-            else{
-                stack.pop();
-                if(lt =='(')
-                    answer +=stack.size();
-                else
+            if(c == ')'){
+                if(i>0 && stick[i-1] == '('){
+                    stack.pop();
+                    answer += stack.size();
+                }
+                else{
+                    stack.pop();
                     answer++;
+                }
             }
-            lt = c;
         }
-        System.out.println(answer);
-    }
 
+        System.out.print(answer);
+    }
 }
