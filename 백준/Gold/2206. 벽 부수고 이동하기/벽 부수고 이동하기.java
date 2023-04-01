@@ -1,88 +1,71 @@
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
- 
-public class Main {
- 
-    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    private static int N, M;
-    private static int[][] map;
-    private static int[][] visited;
-    private static int[] dx = {0, 0, -1, 1};
-    private static int[] dy = {-1, 1, 0, 0};
- 
-    static class Point {
-        int x, y, distance;
-        int drill; // 공사 횟수
- 
-        public Point(int x, int y, int distance, int drill) {
-            this.x = x;
-            this.y = y;
-            this.distance = distance;
-            this.drill = drill;
-        }
+
+class Point{
+    int x;
+    int y;
+    int cnt;
+    int broken;
+    public Point(int x, int y, int cnt, int broken) {
+        this.x = x;
+        this.y = y;
+        this.cnt = cnt;
+        this.broken = broken;
     }
- 
+}
+public class Main {
+
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
- 
-        map = new int[N][M];
-        visited = new int[N][M];
- 
-        for (int i = 0; i < N; i++) {
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+
+        int[] dx = {1, -1, 0, 0};
+        int[] dy = {0, 0, 1, -1};
+        int[][] map = new int[n][m];
+        int[][] visited = new int[n][m];
+        for(int i = 0; i < n; i++){
             String str = br.readLine();
-            for (int j = 0; j < M; j++) {
+            for(int j = 0; j < m; j++){
                 map[i][j] = Integer.parseInt(String.valueOf(str.charAt(j)));
                 visited[i][j] = Integer.MAX_VALUE;
             }
         }
- 
-        int ans = bfs(0, 0);
-        bw.write(ans + "\n");
- 
-        bw.flush();
-        bw.close();
-        br.close();
-    }
- 
-    private static int bfs(int x, int y) {
+        if(n-1 == 0 && m-1 == 0){
+            System.out.println(1);
+            return;
+        }
         Queue<Point> q = new LinkedList<>();
-        q.add(new Point(x, y, 1, 0)); // (1, 1)에서 시작
-        visited[y][x] = 0; // 처음 공사 횟수
- 
-        while (!q.isEmpty()) {
-            Point point = q.poll();
- 
-            // 도착지점을 만났다면 종료한다.
-            if (point.x == M - 1 && point.y == N - 1)
-                return point.distance;
- 
-            for (int i = 0; i < 4; i++) {
-                int nx = point.x + dx[i];
-                int ny = point.y + dy[i];
- 
-                if (nx >= 0 && nx < M && ny >= 0 && ny < N) {
-                    if (visited[ny][nx] > point.drill) {
-                        if (map[ny][nx] == 0) { // 벽이 아닐 때
-                            q.add(new Point(nx, ny, point.distance + 1, point.drill));
-                            visited[ny][nx] = point.drill;
-                        } else { // 벽일 때
-                            if (point.drill == 0) { // 지금까지 벽을 부순 횟수가 0이라면 
-                                q.add(new Point(nx, ny, point.distance + 1, point.drill + 1));
-                                visited[ny][nx] = point.drill + 1;
-                            }
-                        }
+        q.offer(new Point(0, 0, 1, 0));
+        visited[0][0] = 0; // 벽을 부순 횟수
+        while(!q.isEmpty()){
+            Point temp = q.poll();
+            if(n-1 == temp.y && m-1 == temp.x){
+                System.out.println(temp.cnt);
+                return;
+            }
+            for(int i = 0; i < dx.length; i++){
+                int nX = temp.x + dx[i];
+                int nY = temp.y + dy[i];
+                if(nX < 0 || nY < 0|| nX >= m || nY >= n || visited[nY][nX] <= temp.broken) continue;
+                if(map[nY][nX] == 1) {
+                    // 벽을 부순 적이 없다면
+                    if(temp.broken == 0){
+                        visited[nY][nX] = temp.broken + 1; // 벽을 부수며 방문
+                        q.add(new Point(nX, nY, temp.cnt + 1, temp.broken+1));
                     }
+                }else {
+                    visited[nY][nX] = temp.broken;
+                    q.add(new Point(nX, nY, temp.cnt + 1, temp.broken));
                 }
             }
         }
- 
-        return -1;
+        System.out.println(-1);
     }
-}
 
+}
