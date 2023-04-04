@@ -1,0 +1,5 @@
+-- 코드를 입력하세요
+SELECT ANIMAL_TYPE, Count(ANIMAL_TYPE) as count
+FROM ANIMAL_INS
+Group BY ANIMAL_TYPE
+Order By ANIMAL_TYPE;
