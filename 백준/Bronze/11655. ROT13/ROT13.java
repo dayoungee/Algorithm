@@ -6,17 +6,16 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String str = br.readLine(), answer = "";
-        for(char c : str.toCharArray()){
-            int n = 90;
-            if(Character.isLowerCase(c)) n = 122;
+        StringBuilder sb = new StringBuilder();
+        for(char c : br.readLine().toCharArray()){
+            int n = Character.isLowerCase(c) ? 'z' : 'Z';
             if(Character.isLetter(c)){
                 if((c += 13) > n){
                     c -= 26;
                 }
             }
-            answer += c;
+            sb.append(c);
         }
-        System.out.println(answer);
+        System.out.println(sb);
     }
 }
