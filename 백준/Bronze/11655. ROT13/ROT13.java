@@ -9,11 +9,7 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         for(char c : br.readLine().toCharArray()){
             int n = Character.isLowerCase(c) ? 'z' : 'Z';
-            if(Character.isLetter(c)){
-                if((c += 13) > n){
-                    c -= 26;
-                }
-            }
+            if(Character.isLetter(c) && ((c += 13) > n)) c -= 26;
             sb.append(c);
         }
         System.out.println(sb);
