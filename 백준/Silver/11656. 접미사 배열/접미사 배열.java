@@ -9,10 +9,9 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PriorityQueue<String> pq = new PriorityQueue<>();
         String str = br.readLine();
-        String temp = "";
-        for(int i = str.length()-1; i >= 0; i--){
-            temp = str.charAt(i) + temp;
-            pq.add(temp);
+        
+        for(int i = 0; i <str.length(); i++){
+            pq.add(str.substring(i));
         }
 
         StringBuilder sb = new StringBuilder();
