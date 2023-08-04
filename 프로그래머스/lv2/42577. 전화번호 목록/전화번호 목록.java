@@ -3,11 +3,9 @@ import java.util.Map;
 
 class Solution {
     public boolean solution(String[] phone_book) {
-        boolean answer = true;
         Map<String, Integer> map = new HashMap<>();
         
-        int i = 0;
-        for(String s : phone_book) map.put(s, i++);
+        for(String s : phone_book) map.put(s, 0);
         
         for(String str : phone_book){
             for(int j = 0; j < str.length(); j++){
@@ -15,6 +13,6 @@ class Solution {
             }
         }
         
-        return answer;
+        return true;
     }
 }
