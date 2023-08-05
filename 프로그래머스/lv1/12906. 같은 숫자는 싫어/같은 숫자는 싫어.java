@@ -12,8 +12,9 @@ public class Solution {
         }
         int[] answer = new int[stack.size()];
         
-        for(int i = stack.size() - 1; i >= 0; i--){
-            answer[i] = stack.pop();
+        int i = stack.size();
+        while(!stack.isEmpty()){
+            answer[--i] = stack.pop();
         }
         return answer;
     }
