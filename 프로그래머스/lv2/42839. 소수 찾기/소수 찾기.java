@@ -12,6 +12,7 @@ class Solution {
         }
         return answer;
     }
+    
     public void combination(String numbers, String str, Set<Integer> set){
         int len = numbers.length();
         if (!"".equals(str)) {
@@ -21,6 +22,7 @@ class Solution {
             combination(numbers.substring(0, i) + numbers.substring(i + 1, len), str + numbers.charAt(i), set);
         }
     }
+    
     public void setPrime(){
         for(int i = 2; i <= Math.sqrt(check.length); i++){
             if(!check[i]){
