@@ -1,8 +1,16 @@
+import java.util.*;
+
 class Solution {
     public int solution(int n) {
         int answer = 0;
-        for(int i = 1; i <= n; i++){
-            if(n % i == 0) answer += i;
+        for(int i = 1; i <= Math.sqrt(n); i++){
+            if(n % i == 0){
+                if(i * i == n) answer += i;
+                else{
+                    answer += i;
+                    answer += n/i;
+                }
+            }
         }
         return answer;
     }
