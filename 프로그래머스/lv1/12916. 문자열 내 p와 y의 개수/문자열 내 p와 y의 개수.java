@@ -1,14 +1,14 @@
 class Solution {
     boolean solution(String s) {
-        int pCnt = 0;
-        int yCnt = 0;
+        s = s.toUpperCase();
+        int cnt = 0;
         for(char c : s.toCharArray()){
-            if(c == 'p' || c == 'P') pCnt++;
-            else if(c == 'y' || c == 'Y') yCnt++;
+            if(c == 'P') cnt++;
+            else if(c == 'Y') cnt--;
         }
         
-        if(pCnt != yCnt) return false;
-        return true;
+        if(cnt == 0) return true;
+        return false;
 
     }
 }
