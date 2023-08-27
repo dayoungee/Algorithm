@@ -2,25 +2,21 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] numbers) {
-        int i,j,z=0;
-        int cnt=0;
-        HashSet<Integer> ar=new HashSet<Integer>();
-        Arrays.sort(numbers);
+        HashSet<Integer> set = new HashSet<>();
 
-    for(i=0;i<numbers.length;i++){
-        for(j=0;j<numbers.length;j++){
-            if(i!=j)
-            ar.add((numbers[i]+numbers[j]));
+        for (int i = 0; i < numbers.length - 1; i++) {
+            for (int j = i + 1; j < numbers.length; j++) {
+                set.add(numbers[i] + numbers[j]);
+            }
         }
-    }
+        int[] answer = new int[set.size()];
+        Iterator<Integer> iter = set.iterator();
+        int cnt = 0;
+        while(iter.hasNext()) {
+            answer[cnt++] = iter.next();
+        }
 
-int[] answer = new int[ar.size()];
-Iterator iter=ar.iterator();
-while(iter.hasNext())
-answer[cnt++]=(int)iter.next();
-
-Arrays.sort(answer);
-
+        Arrays.sort(answer);
         return answer;
     }
 }
