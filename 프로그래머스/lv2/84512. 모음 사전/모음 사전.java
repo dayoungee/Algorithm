@@ -11,14 +11,7 @@ class Solution {
         // 완전탐색 메서드 호출
         recursion("", 0);
         
-        // 선형 탐색
-        for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).equals(word)) {
-                answer = i;
-                break;
-            }
-        }
-        return answer;
+        return list.indexOf(word);
     }
     
     // 완전탐색 메서드
