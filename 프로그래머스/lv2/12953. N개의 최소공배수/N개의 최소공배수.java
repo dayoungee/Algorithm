@@ -15,12 +15,6 @@ class Solution {
         int bigger = Math.max(a, b);
         int smaller = Math.min(a, b);
 
-        int rest = bigger % smaller;
-
-        if (rest == 0) {
-            return smaller;
-        }
-
-        return gcd(smaller, rest);
+        return smaller == 0 ? bigger : gcd(smaller, bigger % smaller);
     }
 }
