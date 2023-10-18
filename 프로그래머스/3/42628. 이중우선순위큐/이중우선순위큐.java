@@ -22,9 +22,8 @@ class Solution {
                 }
             }
         }
-        int minNum = 0, maxNum = 0;
-        if(!maxQueue.isEmpty()) maxNum = maxQueue.poll();
-        if(!minQueue.isEmpty()) minNum = minQueue.poll();
+        int minNum = minQueue.isEmpty() ? 0 : minQueue.poll();
+        int maxNum = maxQueue.isEmpty() ? 0 : maxQueue.poll();
 
         return new int[] {maxNum, minNum};
     }
