@@ -5,10 +5,7 @@ class Solution {
     public long[] solution(long k, long[] room_number) {
         long[] answer = new long[room_number.length];
         int index = 0;
-        for(long num : room_number) {
-            long target = findEmptyRoom(num);
-            answer[index++] = target;
-        }
+        for(long num : room_number) answer[index++] = findEmptyRoom(num);
         return answer;
     }
     
