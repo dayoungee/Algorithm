@@ -1,43 +1,37 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
-public class Main {
+class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        int[][] map = new int[n][m];
-        int[][] dist = new int[n][m];
-        boolean[][] visited = new boolean[n][m];
+        int[][] board = new int[n][m];
         for(int i = 0; i < n; i++) {
-            String str = br.readLine();
-            for(int j = 0; j < m; j++) {
-                map[i][j] = str.charAt(j) - '0';
-            }
+            char[] str = br.readLine().toCharArray();
+            for(int j = 0; j < m; j++)
+                board[i][j] = str[j] - '0';
         }
-
         Queue<int[]> q = new LinkedList<>();
         q.add(new int[]{0,0});
-        visited[0][0] = true;
-
-        int[] dx = {0, 1, 0, -1};
-        int[] dy = {-1, 0, 1, 0};
-        while (!q.isEmpty()) {
-            int[] temp = q.poll();
+        int[][] dir = {{0,1},{1,0},{0,-1},{-1,0}};
+        int[][] visited = new int[n][m];
+        visited[0][0] = 1;
+        while(!q.isEmpty()) {
+            int[] cur = q.poll();
             for(int i = 0; i < 4; i++) {
-                int nx = temp[0] + dx[i];
-                int ny = temp[1] + dy[i];
-                if(nx < 0 || ny < 0 || nx >= n || ny >= m || map[nx][ny] == 0 || visited[nx][ny]) continue;
-                visited[nx][ny] = true;
-                dist[nx][ny] = dist[temp[0]][temp[1]] + 1;
-                q.add(new int[]{nx, ny});
+                int nx = cur[0] + dir[i][0];
+                int ny = cur[1] + dir[i][1];
+                if(nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny] != 0 || board[nx][ny] == 0) continue;
+                visited[nx][ny] = visited[cur[0]][cur[1]] + 1;
+                q.add(new int[]{nx,ny});
             }
         }
-
-        System.out.println(dist[n - 1][m - 1] + 1);
+        System.out.println(visited[n-1][m-1]);
     }
 }
